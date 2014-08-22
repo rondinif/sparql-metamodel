@@ -1,0 +1,5 @@
+SELECT * WHERE {
+?subject ?relation ?object
+}
+LIMIT 10
+OFFSET 100

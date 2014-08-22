@@ -1,7 +1,7 @@
 SELECT * WHERE {
 ?subject a foaf:Person ;
-    foaf:name ?name ;
-    foaf:depiction ?depiction
+         foaf:name ?name ;
+         foaf:depiction ?depiction
 }
 LIMIT 10
 OFFSET 100
