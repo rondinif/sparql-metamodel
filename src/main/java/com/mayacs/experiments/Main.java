@@ -31,7 +31,7 @@ public final class Main {
 
     private static String dbpediaUrl(final String query) throws UnsupportedEncodingException {
         return String.format(
-                "http://dbpedia.org/sparql?default-graph-uri=%s&query=%s&format=%s&timeout=30000&debug=on", 
+                "http://dbpedia.org/sparql?default-graph-uri=%s&query=%s&format=%s&timeout=30000", 
                 URLEncoder.encode("http://dbpedia.org", "UTF-8"),
                 URLEncoder.encode(query, "UTF-8"),
                 URLEncoder.encode("text/csv", "UTF-8"));
