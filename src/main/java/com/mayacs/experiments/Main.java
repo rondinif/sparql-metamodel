@@ -2,6 +2,7 @@ package com.mayacs.experiments;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import org.apache.metamodel.DataContext;
@@ -24,7 +25,7 @@ public final class Main {
             .selectAll()
             .execute();
         for (final Row row : dataSet) {
-            log(row);
+            System.out.println(Arrays.asList(row.getValues()));
         }
     }
 
@@ -36,7 +37,4 @@ public final class Main {
                 URLEncoder.encode("text/csv", "UTF-8"));
     }
     
-    private static void log(final Object o) {
-        System.out.println(o.toString());
-    }
 }
