@@ -1,0 +1,7 @@
+SELECT * WHERE {
+?id a foaf:Person ;
+    foaf:name ?name ;
+    foaf:depiction ?imgurl
+}
+LIMIT 100
+OFFSET 100
