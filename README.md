@@ -9,3 +9,4 @@ gradle run
 ```
 compile and run the example.
 
+See also https://semanticwebrecipes.wordpress.com/2014/08/25/offering-semantic-web-data-in-apache-metamodel/
