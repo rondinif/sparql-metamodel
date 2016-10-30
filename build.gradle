@@ -2,19 +2,59 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'application'
 
-sourceCompatibility = 1.7
-version = '1.0'
-mainClassName = "com.mayacs.experiments.Main"
+sourceCompatibility = 1.8
+// targetCompatibility = 1.7
 
+version = '1.1.0'
+mainClassName = "com.mayacs.experiments.Main"
+// ext.slf4jVersion = '1.6.4'
+
+//Get dependencies from Maven central repository
 repositories {
     mavenCentral()
 }
 
+//Project dependencies
 dependencies {
+    ext.logbackVersion = '1.1.7'
+    ext.groovyVersion = '2.4.7' 
+
+    runtime "ch.qos.logback:logback-classic:$ext.logbackVersion"
+    runtime "org.codehaus.groovy:groovy-all:$ext.groovyVersion" 
+	// compile 'ch.qos.logback:logback-classic:1.1.2'
     compile group: 'org.apache.metamodel', name: 'MetaModel-full', version: '4.2.0-incubating'
     testCompile group: 'junit', name: 'junit', version: '4.+'
 }
 
 test {
 }
+
+// Q: http://stackoverflow.com/questions/23689054/problems-passing-system-properties-and-parameters-when-running-java-class-via-gr
+// A: http://stackoverflow.com/a/23689696/1657028
+// Application Plugin Approach
+// gradle run -Dmyvariable=myvalue -Dexec.args="arg1 arg2 arg3"
+run {    
+    /* Can pass all the properties: */
+    systemProperties System.getProperties()
+
+    /* Or just each by name: */
+    // systemProperty "myvariable", System.getProperty("myvariable")
+
+    /* Need to split the space-delimited value in the exec.args */
+    // args System.getProperty("exec.args").split()    
+}
+
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+	manifest {
+        attributes 'Implementation-Title': 'Gradle Jar File Example',
+        	'Implementation-Version': version,
+        	'Main-Class': 'com.mkyong.DateUtils'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
 

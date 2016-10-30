@@ -4,3 +4,5 @@ build/
 .classpath
 .project
 bin/
+public-doc/
+debug-file.log
